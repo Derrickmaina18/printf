@@ -1,15 +1,17 @@
 #include "main.h"
+#include <stdlib>
 
 /**
- * _printf - produces output according to a format.
- * @format: character string
- * Return: charsprinted
+ * helper_function_printf - helps with the printf function below
+ * @format: possible format specifier
+ * Return: pointer to function or NULL
  */
 
-static int(const char *format,)
+static int(*helper_function_printf(const char *format))(va_list)
 {
-	int charsprinted;
-	conver_t f_list[] = {
+	unsigned int i;
+	conver_t f_list[] = 
+	{
 		{"c", print_char},
 		{"s", print_string},
 		{"%", print_percent},
@@ -25,13 +27,26 @@ static int(const char *format,)
 		{NULL, NULL}
 	};
 
+	for (i = 0; f_list[i].t != NULL; i++)
+	{
+		if (*(f_list[i].t) == *format)
+			break;
+	}
+	return (f_list[i].function);
+}
+
+/**
+ * _printf - produces output according to a format.
+ * @format: character string
+ * Return: charsprinted
+ */
+
 int _printf(const char *format, ...)
 {
 	unsigned int charsprinted = 0;
 	unsigned int i = 0;
 	va_list argumentsprintf;
 	int (*function)(va_list);
-	char ;
 
 	if (format == NULL)
 		return (-1);
