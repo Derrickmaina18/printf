@@ -27,36 +27,49 @@ static int(const char *format,)
 
 int _printf(const char *format, ...)
 {
-	int charsprinted = 0, int i = 0;
+	unsigned int charsprinted = 0;
+	unsigned int i = 0;
 	va_list argumentsprintf;
+	int (*function)(va_list);
 	char ;
+
+	if (format == NULL)
+		return (-1);
 
 	va_start(argumentsprintf, format);
 
-	for (; format; i++)
+	while (format[i])
 	{
-		if (format[i] == '%')
+		for (; format[i]; i++)
 		{
-			if (format == NULL)
-				return(-1);
-			else if(format[i + 1] == '\o')
+			if (format[i] == '%')
 			{
+				_putchar(format[i]);
+				i++;
+			}
+			else if (!format[i])
+				return (charsprinted);
+
+			function = helper_function_printf(&format[i + 1]);
+
+			else if
+			{	(format[i + 1] == NULL)
 				return(-1);
 			}
 			else if (format[i] == 'c')
 			{
-				_putchar("c\n");
+				_putchar(format[i]);
+				i++;
 			}
 			else if (format[i] == 's')
 			{
-				_putchar("s\n");
+				_putchar(format[i]);
+				i++;
 			}
-		_putchar("%\n");
-		return (0);
+			else
+				i++;
 		}
-		i++;
-		else
-		return (NULL);
+		charsprinted++;
 	}
 	va_end(argumentsprintf);
 	return (charsprinted);
