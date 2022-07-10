@@ -1,11 +1,15 @@
 #include "main.h"
 
-// Return: charsprinted
+/**
+ * _printf - produces output according to a format.
+ * @format: character string
+ * Return: charsprinted
+ */
 
 int _printf(const char *format, ...)
 {
-	va_list argumentsprintf;
 	int charsprinted = 0, int i = 0;
+	va_list argumentsprintf;
 	char ;
 
 	va_start(argumentsprintf, format);
