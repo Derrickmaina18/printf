@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
- * _printf - Receives the main string and all the necessary parameters to
- * print a formated string
- * @format: A string containing all the desired characters
- * Return: A total count of the characters printed
+ * _printf - produces output according to a format.
+ * @format: character string
+ * Return: charsprinted
  */
-int _printf(const char *format, ...)
+
+static int(const char *format,)
 {
-	int printed_chars;
+	int charsprinted;
 	conver_t f_list[] = {
 		{"c", print_char},
 		{"s", print_string},
@@ -24,14 +24,40 @@ int _printf(const char *format, ...)
 		{"X", print_heX},
 		{NULL, NULL}
 	};
-	va_list arg_list;
 
-	if (format == NULL)
-		return (-1);
+int _printf(const char *format, ...)
+{
+	int charsprinted = 0, int i = 0;
+	va_list argumentsprintf;
+	char ;
 
-	va_start(arg_list, format);
-	/*Calling parser function*/
-	printed_chars = parser(format, f_list, arg_list);
-	va_end(arg_list);
-	return (printed_chars);
+	va_start(argumentsprintf, format);
+
+	for (; format; i++)
+	{
+		if (format[i] == '%')
+		{
+			if (format == NULL)
+				return(-1);
+			else if(format[i + 1] == '\o')
+			{
+				return(-1);
+			}
+			else if (format[i] == 'c')
+			{
+				_putchar("c\n");
+			}
+			else if (format[i] == 's')
+			{
+				_putchar("s\n");
+			}
+		_putchar("%\n");
+		return (0);
+		}
+		i++;
+		else
+		return (NULL);
+	}
+	va_end(argumentsprintf);
+	return (charsprinted);
 }
