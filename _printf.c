@@ -1,54 +1,40 @@
-#include <stdlib.h>
-#include <stdarg.h>
 #include "main.h"
 
-/**
-* _printf - function that print characters for conditional character
-* @format: char pointer
-*
-* Return: integer equal to lenght the print
-*/
-
+// Return: charsprinted
 
 int _printf(const char *format, ...)
 {
-	va_list pa;
-	const char *p;
-	int num = 0;
+	va_list argumentsprintf;
+	int charsprinted = 0, int i = 0;
+	char ;
 
-	if (format == NULL)
-		return (-1);
+	va_start(argumentsprintf, format);
 
-	va_start(pa, format);
-	for (p = format; *p; p++)
+	for (; format; i++)
 	{
-		if (*p == '%')
+		if (format[i] == '%')
 		{
-			switch (*++p)
+			if (format == NULL)
+				return(-1);
+			else if(format[i + 1] == '\o')
 			{
-				case 's':
-					num = num + print_string(pa);
-					break;
-				case 'c':
-					num = num + print_character(pa);
-					break;
-				case '%':
-					num = num + 1;
-					_putchar('%');
-					break;
-				case '\0':
-					return (-1);
-				case 'i':
-				case 'd':
-					num = num + print_integer(pa);
-					break;
-				default:
-					_putchar('%'), _putchar(*p), num = num + 2;
+				return(-1);
 			}
+			else if (format[i] == 'c')
+			{
+				_putchar("c\n");
+			}
+			else if (format[i] == 's')
+			{
+				_putchar("s\n");
+			}
+		_putchar("%\n");
+		return (0);
 		}
+		i++;
 		else
-			_putchar(*p), num++;
+		return (NULL);
 	}
-	va_end(pa);
-	return (num);
+	va_end(argumentsprintf);
+	return (charsprinted);
 }
