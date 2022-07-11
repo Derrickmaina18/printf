@@ -7,7 +7,7 @@
  * Return: pointer to function or NULL
  */
 
-static int(*helper_function_printf(const char *format))(va_list)
+static int (*helper_function_printf(const char *format))(va_list)
 {
 	unsigned int i;
 	conver_t f_list[] = 
@@ -26,13 +26,26 @@ static int(*helper_function_printf(const char *format))(va_list)
 		{"X", print_heX},
 		{NULL, NULL}
 	};
+	int i = 0, j = 0, first_index;
 
-	for (i = 0; f_list[i].t != NULL; i++)
+	first_index = index;
+	while (f_list[i].type_arg)
 	{
-		if (*(f_list[i].t) == *format)
-			break;
-	}
-	return (f_list[i].function);
+		if (s[index] == f_list[i].type_arg[j])
+		{
+			if (f_list.type_arg[j + 1] != '\0')
+				index++, j++;
+			else
+				break;
+		}
+		else
+		{
+			j = 0;
+			i++;
+		index = first_index;
+		}
+	}	
+	return (f_list[i].f);
 }
 
 /**
@@ -46,7 +59,7 @@ int _printf(const char *format, ...)
 	unsigned int charsprinted = 0;
 	unsigned int i = 0;
 	va_list argumentsprintf;
-	int (*function)(va_list);
+	int (*f)(va_list);
 
 	if (format == NULL)
 		return (-1);
@@ -55,36 +68,29 @@ int _printf(const char *format, ...)
 
 	while (format[i])
 	{
-		for (; format[i]; i++)
+		for (; format[i] != '%' && format[i]; i++)
 		{
-			if (format[i] == '%')
-			{
-				_putchar(format[i]);
-				i++;
-			}
-			else if (!format[i])
-				return (charsprinted);
-
-			function = helper_function_printf(&format[i + 1]);
-
-			else if
-			{	(format[i + 1] == NULL)
-				return(-1);
-			}
-			else if (format[i] == 'c')
-			{
-				_putchar(format[i]);
-				i++;
-			}
-			else if (format[i] == 's')
-			{
-				_putchar(format[i]);
-				i++;
-			}
-			else
-				i++;
+			_putchar(format[i]);
+			charsprinted+=;
 		}
+
+		if (!format[i])
+			return (charsprinted);
+		f = helper_function_printf(&format[i + 1]);
+		if (f != NULL)
+		{
+			charsprinted += f(argumentsprintf);
+			i += 2;
+			continue;
+		}
+		if (!format[i + 1])
+			return (-1);
+		_putchar(format[i]);
 		charsprinted++;
+		if (format[i + 1] == '%')
+			i += 2;
+		else 
+			i++;
 	}
 	va_end(argumentsprintf);
 	return (charsprinted);
