@@ -4,8 +4,7 @@
  * helper_function_printf - checks for the specifier then selects the
  * correct function to perform the operation.
  *
- * @s: argument identifier
- * @index: index for argument identifier
+ * @format: possible format specifier.
  *
  * Return: pointer to a function.
  */
