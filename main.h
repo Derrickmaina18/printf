@@ -25,7 +25,7 @@ int _printf(const char *format, ...);
 int _putchar(char c);
 int print_c(va_list c);
 int print_s(va_list s);
-int (*helper_function_printf(const char *format))(va_list);
-int return_id_helper(const char *format);
+int (*helper_function_printf(const char *format, int index))(va_list);
+int return_id_helper(const char *format, int index);
 
 #endif
